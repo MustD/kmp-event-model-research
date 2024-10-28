@@ -10,6 +10,8 @@ plugins {
 group = "com.example"
 version = "0.0.1"
 
+kotlin.jvmToolchain(21)
+
 application {
     mainClass.set("com.example.ApplicationKt")
 
@@ -34,3 +36,5 @@ dependencies {
     testImplementation("io.ktor:ktor-server-test-host-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
+
+

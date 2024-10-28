@@ -1,5 +1,6 @@
 package com.example.event.server
 
+import com.example.Configuration.json
 import com.example.event.Event
 import com.example.event.front.ClientIntegrationGateway
 import io.ktor.util.logging.*
@@ -22,7 +23,6 @@ object ServerIntegrationGateway {
 
     suspend fun receive(event: String) {
         logger.info("API server - received event: $event") //not called
-
-        channel.emit(Json.decodeFromString(event))
+        channel.emit(json.decodeFromString(event))
     }
 }
