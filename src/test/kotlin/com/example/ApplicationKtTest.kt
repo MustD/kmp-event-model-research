@@ -10,8 +10,11 @@ import kotlinx.coroutines.delay
 import java.util.UUID
 import kotlin.test.Test
 import kotlin.time.Duration.Companion.seconds
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
 
+@OptIn(ExperimentalUuidApi::class)
 class ApplicationKtTest {
 
     @Test
@@ -22,7 +25,9 @@ class ApplicationKtTest {
         startApplication()
 
         delay(1.seconds)
-        UserApi.createUser(User(UUID.randomUUID().toString()))
+        UserApi.createUser(
+            User(Uuid.random().toString())
+        )
     }
 }
 

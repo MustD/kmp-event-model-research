@@ -15,7 +15,7 @@ object ClientEventGateway {
     val events = channel as SharedFlow<Event>
 
     suspend fun send(event: Event) {
-        logger.info("Event: $event")
+        logger.info("Client event: $event")
         channel.emit(event)
     }
 

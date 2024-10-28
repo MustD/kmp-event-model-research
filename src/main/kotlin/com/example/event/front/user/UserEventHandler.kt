@@ -11,16 +11,18 @@ import kotlinx.coroutines.launch
 object UserEventHandler {
     private val logger = KtorSimpleLogger(this::class.java.name)
 
-    private val client by lazy { ClientEventGateway }
-    private val integration by lazy { ClientIntegrationGateway }
+    private val clientGateway by lazy { ClientEventGateway }
+    private val integrationGateway by lazy { ClientIntegrationGateway }
 
     fun CoroutineScope.handleUserEvents() = launch {
         logger.info("Starting")
 
-        client.events.collect {
-            logger.info(it.toString())
+        clientGateway.events.collect {
             when (it) {
-                is CreateUserEvent, is ReadUsersEvent -> integration.send(it)
+                is CreateUserEvent, is ReadUsersEvent -> {
+                    logger.info("User event handler: $it")
+                    integrationGateway.send(it)
+                }
             }
         }
     }
