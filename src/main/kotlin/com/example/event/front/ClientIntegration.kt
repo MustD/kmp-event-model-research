@@ -2,14 +2,14 @@ package com.example.event.front
 
 import com.example.Configuration.json
 import com.example.event.Event
-import com.example.event.server.ServerIntegrationGateway
+import com.example.event.server.ServerIntegration
 import io.ktor.util.logging.*
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-object ClientIntegrationGateway {
+object ClientIntegration {
     private val logger = KtorSimpleLogger(this::class.java.name)
 
     private val channel = MutableSharedFlow<Event>()
@@ -22,7 +22,7 @@ object ClientIntegrationGateway {
             logger.error(it)
         }.map {
             logger.info("API client - send event: $it")
-            ServerIntegrationGateway.receive(it)
+            ServerIntegration.receive(it)
         }
     }
 

@@ -4,7 +4,7 @@ import com.example.event.Event
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 
-object ServerEventGateway {
+object ServerGateway {
     private val channel = MutableSharedFlow<Event>()
 
     val events = channel as SharedFlow<Event>
