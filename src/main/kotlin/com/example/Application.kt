@@ -1,6 +1,8 @@
 package com.example
 
 import com.example.event.front.user.UserEventHandler
+import com.example.event.server.ServerGateway
+import com.example.event.server.ServerIntegration
 import com.example.event.server.user.UserHandler
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
@@ -17,7 +19,13 @@ fun Application.module() {
 //    configureSockets()
 //    configureRouting()
 
+    //client
     with(UserEventHandler) { handleUserEvents() }
+
+    //server
+    with(ServerIntegration) { listenServerGateway() }
+    with(ServerGateway) { listenClientEvents() }
+
     with(UserHandler) { handleUserEvents() }
 
 }

@@ -2,8 +2,8 @@ package com.example.event.front.user
 
 import com.example.event.front.ClientGateway
 import com.example.event.front.ClientIntegration
-import com.example.event.model.user.CreateUserEvent
 import com.example.event.model.user.ReadUsersEvent
+import com.example.event.model.user.create.CreateUserIntention
 import io.ktor.util.logging.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -19,7 +19,7 @@ object UserEventHandler {
 
         clientGateway.events.collect {
             when (it) {
-                is CreateUserEvent, is ReadUsersEvent -> {
+                is CreateUserIntention, is ReadUsersEvent -> {
                     logger.info("User event handler: $it")
                     integrationGateway.send(it)
                 }

@@ -7,9 +7,9 @@ import kotlin.uuid.Uuid
 
 @OptIn(ExperimentalUuidApi::class)
 object ServerState {
-    val users = MutableStateFlow<List<User>>(
+    val users = MutableStateFlow<Map<String, User>>(
         listOf(
             User(id = Uuid.random().toString())
-        )
+        ).associateBy { it.id }
     )
 }
