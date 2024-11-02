@@ -3,6 +3,7 @@ package com.example
 import com.example.event.Event
 import com.example.event.model.user.ReadUsersEvent
 import com.example.event.model.user.create.CreateUserIntention
+import com.example.event.model.user.create.CreateUserResult
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 
@@ -16,6 +17,7 @@ object Configuration {
         useArrayPolymorphism = false
         serializersModule = SerializersModule {
             polymorphic(Event::class, CreateUserIntention::class, CreateUserIntention.serializer())
+            polymorphic(Event::class, CreateUserResult::class, CreateUserResult.serializer())
             polymorphic(Event::class, ReadUsersEvent::class, ReadUsersEvent.serializer())
         }
         classDiscriminator = "_type"
